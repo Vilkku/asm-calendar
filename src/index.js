@@ -1,12 +1,44 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga'
+import reducer from './reducers';
 import App from './App';
-import './index.css';
 import {IntlProvider} from 'react-intl';
+import { fetchEvents, selectLocations, selectMajorOnly } from './actions/events';
+import eventsSaga from './sagas/events';
+import storage from 'store/dist/store.modern';
 
-ReactDOM.render(
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(
+  reducer,
+  applyMiddleware(sagaMiddleware)
+);
+
+sagaMiddleware.run(eventsSaga);
+
+store.subscribe(() => {
+  console.log(store.getState());
+});
+
+store.dispatch(fetchEvents());
+
+if (storage.get('locations')) {
+  store.dispatch(selectLocations(storage.get('locations')));
+}
+
+if (storage.get('majorOnly')) {
+  console.log(storage.get('majorOnly'));
+  store.dispatch(selectMajorOnly(storage.get('majorOnly')));
+}
+
+render(
   <IntlProvider locale='en-GB'>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </IntlProvider>,
   document.getElementById('root')
 );
