@@ -6,6 +6,18 @@ import PropTypes from 'prop-types';
 import './css/event.css';
 
 class Event extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      descriptionVisible: false
+    };
+    this.toggleDescription = this.toggleDescription.bind(this);
+  }
+
+  toggleDescription() {
+    this.setState({descriptionVisible: !this.state.descriptionVisible});
+  }
+
   render() {
     let title = this.props.event.summary;
 
@@ -51,17 +63,27 @@ class Event extends Component {
 
     let description = this.props.event.description;
 
-    let descriptionDisplay;
+    let descriptionToggle, descriptionDisplay;
     if (description && description !== '') {
-      descriptionDisplay = (
-        <p>
-          <small>
-            <i>
-              {description}
-            </i>
-          </small>
-        </p>
+      descriptionToggle = (
+        <span
+          className="glyphicon glyphicon-info-sign description-toggle"
+          aria-hidden="true"
+          onClick={this.toggleDescription}
+        />
       );
+
+      if (this.state.descriptionVisible) {
+        descriptionDisplay = (
+          <p>
+            <small>
+              <i>
+                {description}
+              </i>
+            </small>
+          </p>
+        );
+      }
     }
 
     return (
@@ -77,6 +99,7 @@ class Event extends Component {
           {ongoingDisplay}
           {'), '}
           {this.props.event.location}
+          {descriptionToggle}
         </p>
         {descriptionDisplay}
       </div>

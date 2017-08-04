@@ -63,17 +63,17 @@ class App extends Component {
   render() {
     return (
       <div>
-        <div className="row">
-          <div className="col-xs-12">
-            {this.state.events.map(event => {
-              return (
-                <Event key={event.uid} event={event} />
-              );
-            })}
-          </div>
-        </div>
         <div className="row locations">
-          <div className="col-xs-12">
+          <div className="col-md-8 col-lg-9">
+            <Select
+              name='location-select'
+              value={this.props.selectedLocations}
+              options={this.props.locations}
+              onChange={this.handleLocationSelect}
+              multi={true}
+            />
+          </div>
+          <div className="col-md-4 col-lg-3">
             <div className="checkbox">
               <label>
                 <input
@@ -85,14 +85,14 @@ class App extends Component {
               </label>
             </div>
           </div>
+        </div>
+        <div className="row">
           <div className="col-xs-12">
-            <Select
-              name='location-select'
-              value={this.props.selectedLocations}
-              options={this.props.locations}
-              onChange={this.handleLocationSelect}
-              multi={true}
-            />
+            {this.state.events.map(event => {
+              return (
+                <Event key={event.uid} event={event} />
+              );
+            })}
           </div>
         </div>
       </div>

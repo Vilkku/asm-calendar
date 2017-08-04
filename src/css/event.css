@@ -5,3 +5,10 @@
 .event .time {
     margin-bottom: 0;
 }
+
+.event .description-toggle {
+    margin-left: 5px;
+    font-size: larger;
+    vertical-align: top;
+    cursor: pointer;
+}

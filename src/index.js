@@ -19,10 +19,6 @@ const store = createStore(
 
 sagaMiddleware.run(eventsSaga);
 
-store.subscribe(() => {
-  console.log(store.getState());
-});
-
 store.dispatch(fetchEvents());
 
 if (storage.get('locations')) {
