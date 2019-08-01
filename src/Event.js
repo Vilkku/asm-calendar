@@ -77,9 +77,7 @@ class Event extends Component {
         descriptionDisplay = (
           <p>
             <small>
-              <i>
-                {description}
-              </i>
+              <i dangerouslySetInnerHTML={{__html: description}} />
             </small>
           </p>
         );
