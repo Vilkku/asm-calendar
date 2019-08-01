@@ -10,6 +10,8 @@ build
 .DS_Store
 npm-debug.log
 
+.idea
+
 # Created by https://www.gitignore.io/api/phpstorm
 # Edit at https://www.gitignore.io/?templates=phpstorm
 
