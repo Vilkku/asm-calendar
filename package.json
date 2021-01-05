@@ -6,7 +6,7 @@
     "react-scripts": "^1.0.10"
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "ical": "^0.5.0",
     "lodash": "^4.14.1",
     "react": "^15.2.1",
